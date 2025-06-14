@@ -1,1 +1,350 @@
 /* Add your CSS here */
+
+/* Set the background color to Intel blue with a modern gradient */
+body {
+  background-color: #0071c5; /* Fallback: Intel blue */
+  /* Make the bottom of the screen lighter for a more noticeable gradient */
+  background-image: linear-gradient(to bottom, #005fa3 0%, #3fa9f5 70%, #e6f6ff 100%);
+  margin: 0; /* Remove default margin */
+  padding: 0;
+  min-height: 100vh; /* Make sure background covers the whole page */
+}
+
+/* Use Inter font for all main body text */
+body,
+.intel-logo,
+.sustainability-heading,
+.sustainability-text {
+  font-family: 'Inter', Arial, Helvetica, sans-serif; /* Use Inter, then Arial/Helvetica if not available */
+}
+
+/* Center the header and set its width */
+header {
+  /* Use flexbox to center content vertically and horizontally */
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  margin-top: 100px; /* Add space from the top */
+  width: 100%; /* Make header take full width */
+}
+
+/* Style the "intel" text to look like the Intel logo */
+.intel-logo {
+  font-size: 5em; /* Make the text large */
+  color: #ffffff; /* White text color */
+  font-weight: bold; /* Make the text bold */
+  letter-spacing: 2px; /* Add some space between letters */
+  /* Add a simple effect to mimic the logo */
+  text-shadow: 2px 2px 8px #005fa3; /* Soft blue shadow */
+  /* The real Intel logo uses a custom font, but this is a close beginner-friendly match */
+}
+
+/* Style for the "Sustainability Through the Ages" heading */
+.sustainability-heading {
+  color: #ffffff; /* White text */
+  font-size: 1.5em; /* Make the heading smaller */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center the text inside the heading */
+  margin-top: 1em; /* Space above the logo */
+  margin-bottom: 0.5em; /* Space below the heading */
+  width: 100%; /* Take full width of the header */
+}
+
+/* Style for the text below the heading */
+.sustainability-text {
+  color: #ffffff; /* White text */
+  font-size: 1.2em; /* Regular size for body text using em units */
+  text-align: center; /* Center the text */
+  margin-top: 0.5em; /* Space above the text */
+  width: 70%; /* Take full width of the header */
+  margin-left: auto;  /* Center the image horizontally */
+  margin-right: auto;
+  /* Center the text block */
+  padding-left: 2.5%; /* Equal padding on both sides */
+  padding-right: 2.5%;
+  white-space: normal; /* Allow the description to wrap onto multiple lines */
+}
+
+/* Make the Intel logo image bigger */
+header img {
+  width: 20%;   /* Increase the logo size */
+  height: auto;  /* Keep the aspect ratio */
+  display: block; /* Remove extra space below the image */
+  margin-left: auto;  /* Center the image horizontally */
+  margin-right: auto;
+}
+
+/* Timeline roulette: horizontal scrollable row of images */
+.timeline-roulette {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5em;
+  padding: 1em 0;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  justify-content: start;          /* ✅ Allow items to start at left */
+  scrollbar-width: none;
+  width: 100%;                     /* ✅ Allow full scroll area */
+  max-width: 100%;                 /* ✅ No artificial limit */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.timeline-roulette::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Style each image in the roulette */
+
+.roulette-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  scroll-snap-align: center;
+  background: #eee;
+  transition: border-color 0.2s;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+/* Make the centered (active) image larger and more visible */
+.roulette-img-active {
+  transform: scale(1.2);
+  opacity: 1;
+  border-color: #3fa9f5;
+  z-index: 1;
+}
+
+/* Dots below the roulette */
+.roulette-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 0.2em;    /* Smaller gap above dots */
+  margin-bottom: 2em;
+}
+/* Inner container for dots (for easy shifting if needed) */
+.roulette-dots-inner {
+  display: flex;
+  gap: 0.5em;
+  width: auto;
+  transition: none;
+}
+
+/* Style for each dot */
+.roulette-dot {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.5;
+  display: inline-block; /* Only 3 will be shown at a time */
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+  border: 1px solid #3fa9f5;
+}
+
+/* Highlight the active dot */
+.roulette-dot.active {
+  opacity: 1;
+  background: #3fa9f5;
+}
+
+/* Wrapper for the roulette and arrows */
+.roulette-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: visible;
+  margin-top: 4em;
+  margin-bottom: 3em; /* ✅ increase to push down text */
+  position: relative; /* ensures scaled children don't overlap following text */
+}
+
+/* Style for the left and right arrow buttons */
+.roulette-arrow {
+  background: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.5em;
+  color: #0071c5;
+  cursor: pointer;
+  margin: 0 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.roulette-arrow:hover {
+  background: #3fa9f5;
+  color: #fff;
+}
+
+/* Container for each image and its year label */
+.roulette-item {
+  position: relative;
+  width: 40vw;
+  height: 40vw;
+  max-width: 180px;
+  max-height: 180px;
+  min-width: 80px;
+   scroll-snap-align: center;
+  min-height: 80px;
+  flex-shrink: 0;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4em;
+  margin-top: 2em;
+  margin = 0; /* ✅ Adds space for the year label above */
+}
+/* Overlay that appears as a full circle on image hover */
+.roulette-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Always fill the entire picture area */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 0.85em;
+  text-align: center;
+  padding: 0 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* Heading inside overlay */
+.roulette-overlay-heading {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 0.2em;
+  margin-top: 0;
+  line-height: 1.1;
+  width: 100%;
+  text-align: center;
+  /* No extra padding to keep it compact */
+}
+
+/* Line under heading in overlay */
+.roulette-overlay-line {
+  width: 60%;
+  height: 2px;
+  background: #fff;
+  opacity: 0.5;
+  margin: 0.1em 0 0.4em 0;
+  border: none;
+  border-radius: 1px;
+}
+
+/* Show overlay as a full circle when hovering the image or the item */
+.roulette-item:hover .roulette-img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+.roulette-item:hover .roulette-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Year label above each image in the roulette */
+.roulette-year {
+  position: absolute;
+  top: -2em; /* Move it above the image */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  color: #ffffff; /* Match text color */
+  font-size: 1.2em; /* Match .sustainability-text size */
+  font-family: 'Inter', Arial, Helvetica, sans-serif; /* Match font */
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* Highlight the year above the active image */
+.roulette-year-active {
+  opacity: 1;
+  color: #ffffff;
+}
+
+/* Make the description text and roulette scale for small screens */
+@media (max-width: none) {
+  .sustainability-text {
+    width: 95%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 1em;
+    text-align: center;
+  }
+
+  header img {
+    width: 45vw;
+    min-width: 90px;
+    max-width: 180px;
+  }
+
+  .timeline-roulette {
+    gap: 0.5em;
+    max-width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 15vw;
+    scroll-behavior: smooth;
+  }
+
+  .roulette-item {
+    width: 60vw;
+    height: 60vw;
+    max-width: 180px;
+    max-height: 180px;
+    min-width: 90px;
+    min-height: 90px;
+    scroll-snap-align: center;
+    margin-top: 2em;
+    padding: 0;
+  }
+
+  .roulette-img,
+  .roulette-overlay {
+    width: 100%;
+    height: 100%;
+    max-width: 180px;
+    max-height: 180px;
+    padding: 0;
+  }
+
+  .roulette-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    margin: 0 4px;
+  }
+}
